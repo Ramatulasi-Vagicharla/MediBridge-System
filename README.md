@@ -58,8 +58,9 @@ Each of these features is designed to optimize the healthcare workflow, enhance 
 
 ### Prerequisites
 Ensure you have the following installed on your machine:
-- **Java 11+**
-- **Node.js** (for frontend development)
+- **Java 17+**
+- **Angular**
+- **Node.js**
 - **MySQL**
 - **Maven**
 
