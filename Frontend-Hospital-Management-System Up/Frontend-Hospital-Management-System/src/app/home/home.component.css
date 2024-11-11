@@ -26,11 +26,13 @@
     max-width: 90%;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
   }
   
   .card h2 {
     text-align: center;
     margin-top: 0;
+    height:auto ;
   }
   
   .card div {
@@ -51,11 +53,14 @@
   }
   
   button[type="button"] {
-    background-color: #dc3545; /* Cancel button color */
+    background-color: #dc3545; 
+    border-radius: 5px;/* Cancel button color */
   }
   
   button[type="submit"] {
-    background-color: #007bff; /* Book button color */
+    background-color: #007bff;
+     /* Book button color */
+     border-radius: 5px;
   }
 
 body{

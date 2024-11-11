@@ -6,12 +6,6 @@
   <!-- Font Awesome Link for Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  <style>
-    /* Global Styles */
-   
-        
-
-</style>
 </head>
 
 <body>
@@ -277,25 +271,6 @@
   <h2>Our Location</h2>
   <iframe src="https://www.google.com/maps/embed?pb=YOUR_GOOGLE_MAP_LINK" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 </section>
-
-  <!-- <footer>
-    <div class="container contact-info" style="max-width: 1200px; margin: 0 auto;">
-        <h4>Contact Us</h4>
-        <p>Phone: <strong>8567898111,</strong> Email: <strong><a href="mailto:akshayakolla0099@gmail.com" style="color: white; text-decoration: none;">akshayakolla0099&#64;gmail.com</a></strong></p>
-        <p>Address: <strong>Araku, Vishakapatnam, Andhra Pradesh, 531151</strong></p>
-        <p>Emergency Contact: <strong>108</strong></p>
-    </div>
-    
-   
-    <h4>Follow Us</h4>
-    <div class="social-links">
-        <a href="https://www.facebook.com" target="_blank">Facebook</a> |
-        <a href="https://www.twitter.com" target="_blank">Twitter</a> |
-        <a href="https://www.instagram.com" target="_blank">Instagram</a>
-    </div>
-    <p style="margin: 5px 0;">© 2024-2025 Medi
-Bridge Hospitals. All rights reserved.</p>
-</footer> -->
 <footer>
   <div class="footer-container">
       
@@ -351,20 +326,21 @@ Bridge Hospitals. All rights reserved.</p>
     <span>Emergency: 108</span>
 </a>
 <div *ngIf="showCard" class="modal-overlay">
-    <div class="card">
-      <h2>Book an Appointment</h2>
-      <form (submit)="sendEmail()">
+    <div class="card" style="background-color: lightcyan;">
+      <h2 style="font-weight: bolder;">Book an Appointment</h2>
+      <form (submit)="sendEmail()" style="margin-left:28px;margin-top:10px;">
         <div>
-          <label for="name">Name:</label>
-          <input type="text" id="name" [(ngModel)]="name" name="name" required />
+          <label for="name" style="color:darkcyan; font-size:large;font-weight:bold;">Name:</label>&nbsp;&nbsp;
+          <input type="text" id="name" [(ngModel)]="name" name="name" required style="margin:3px; border-radius:5px;" />
+        </div>
+
+        <div>
+          <label for="email" style="color:darkcyan; font-size:large;font-weight:bold;">Email:</label>&nbsp;&nbsp;
+          <input type="email" id="email" [(ngModel)]="email" name="email" style="margin:3px; border-radius:5px;"required />
         </div>
         <div>
-          <label for="email">Email:</label>
-          <input type="email" id="email" [(ngModel)]="email" name="email" required />
-        </div>
-        <div>
-          <label for="phone">Phone:</label>
-          <input type="tel" id="phone" [(ngModel)]="phone" name="phone" required />
+          <label for="phone" style="color:darkcyan; font-size:large;font-weight:bold;">Phone:</label>&nbsp;
+          <input type="tel" id="phone" [(ngModel)]="phone" name="phone" style="margin:3px; border-radius:5px;" required />
         </div>
         <div class="button-group">
           <button type="button" (click)="cancel()">Cancel</button>
