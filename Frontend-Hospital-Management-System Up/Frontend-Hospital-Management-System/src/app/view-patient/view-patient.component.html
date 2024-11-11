@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta Tags and Bootstrap CSS as provided -->
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">MediBridge Hospitals</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="javascript:void(0);" routerLink="/docdash">Back</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container custom-container mt-5">
+    <div class="patient-details">
+      <label>ID: <b>{{patient.id}}</b></label><br>
+      <label>Name: <b>{{patient.name}}</b></label><br>
+      <label>Age: <b>{{patient.age}}</b></label><br>
+      <label>Blood Group: <b>{{patient.blood}}</b></label><br>
+      <label>Prescription: <b>{{patient.prescription}}</b></label><br>
+      <label>Dose: <b>{{patient.dose}}</b></label><br>
+      <label>Fees: <b>{{patient.fees}}</b></label><br>
+    </div>
+
+    <div class="email-section mt-4">
+      <label for="userEmail" class="form-label">Enter your email to receive the report:</label>
+      <input type="email" [(ngModel)]="userEmail" class="form-control" id="userEmail" placeholder="example@example.com" required>
+    </div>
+
+    <!-- Need Scan Section -->
+    <div class="scan-section mt-4">
+      <label for="needScan" class="form-label">Do you need a scan?</label>
+      <select [(ngModel)]="needScan" class="form-control" id="needScan">
+        <option [value]="false">No</option>
+        <option [value]="true">Yes</option>
+      </select>
+    </div>
+
+    <!-- Conditional Scan Type and Referral Section -->
+    <div *ngIf="needScan" class="mt-3">
+      <label for="scanType" class="form-label">Type of Scan:</label>
+      <input type="text" [(ngModel)]="scanType" class="form-control" id="scanType" placeholder="Enter scan type (e.g., MRI, CT)">
+      
+      <div class="mt-3">
+        <label>Referred Doctors:</label>
+        <div>
+          <label><input type="checkbox" [(ngModel)]="doctor1" /> Dr. Smith</label>
+          <label><input type="checkbox" [(ngModel)]="doctor2" /> Dr. Johnson</label>
+          <label><input type="checkbox" [(ngModel)]="doctor3" /> Dr. Williams</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons mt-4">
+      <button (click)="downloadReport()" class="btn btn-primary custom-btn">Download Report</button>
+      <button (click)="sendEmailReport()" class="btn btn-success custom-btn">Send Email</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

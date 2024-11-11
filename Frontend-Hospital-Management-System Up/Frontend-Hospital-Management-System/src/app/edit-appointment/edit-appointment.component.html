@@ -1,0 +1,151 @@
+<div class="container mt-5">
+    <h2 class="text-center text-primary mb-4">Edit Appointment</h2>
+
+    <form (ngSubmit)="onSubmit()" class="form-container">
+        <div class="form-group mb-4">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-control" [(ngModel)]="appointment.name" name="name" required placeholder="Enter patient's name" />
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="age" class="form-label">Age</label>
+            <input type="number" id="age" class="form-control" [(ngModel)]="appointment.age" name="age" required placeholder="Enter patient's age" />
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="symptoms" class="form-label">Symptoms</label>
+            <input type="text" id="symptoms" class="form-control" [(ngModel)]="appointment.symptoms" name="symptoms" required placeholder="Enter symptoms" />
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="appointmentDate" class="form-label">Appointment Date</label>
+            <input type="date" id="appointmentDate" class="form-control" [(ngModel)]="appointment.appointmentDate" name="appointmentDate" required />
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="assignedDoctor" class="form-label">Assigned Doctor</label>
+            <select class="form-control" [(ngModel)]="appointment.assignedDoctor" name="assignedDoctor" required style="height:auto">
+                <option value="" disabled>Select Doctor</option>
+                <option value="Dr. Akshaya (General Medicine)">Dr. Akshaya (General Medicine)</option>
+                <option value="Dr. Tulasi (Dermatologist)">Dr. Tulasi (Dermatologist)</option>
+                <option value="Dr. Vinutna (Cardiologist)">Dr. Vinutna (Cardiologist)</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg w-100 mt-4">Save Changes</button>
+    </form>
+</div>
+
+<!-- Custom styles -->
+<style>
+    body {
+        background-color: #f4f7fa;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 600px;
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin-top: 50px;
+    }
+
+    h2 {
+        font-size: 32px;
+        font-weight: 600;
+        color: #007bff;
+        text-transform: uppercase;
+        text-align: center;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        padding: 40px;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-label {
+        font-weight: 600;
+        font-size: 18px; /* Increased font size for better readability */
+        color: #495057;
+        margin-bottom: 8px;
+        height:5px; /* Increased space between label and input */
+    }
+
+    .form-control {
+        font-size: 14px;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    .form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+        outline: none;
+    }
+
+    select.form-control {
+        font-size: 16px; /* Increased font size for select dropdown */
+        padding: 14px 15px; /* Increased padding for better touch/click area */
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        background-color: white;
+        color: #495057;
+        width: 100%;
+    }
+
+    select.form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+    }
+
+    option {
+        padding: 10px;
+        font-size: 14px;
+        color: #495057;
+        background-color: white;
+    }
+
+    option:hover {
+        background-color: #f1f1f1;
+    }
+
+    button[type="submit"] {
+        font-size: 16px;
+        font-weight: 600;
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #218838;
+        transform: translateY(-2px);
+    }
+
+    button[type="submit"]:focus {
+        outline: none;
+        box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            margin: 20px;
+            padding: 20px;
+        }
+    }
+</style>

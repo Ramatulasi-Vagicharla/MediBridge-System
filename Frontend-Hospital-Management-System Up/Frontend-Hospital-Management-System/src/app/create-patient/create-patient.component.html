@@ -1,0 +1,172 @@
+<style>
+  /* Navbar Styles */
+  .navbar {
+    margin: auto;
+    background-color: #343a40;
+    padding: 0.8rem 1rem;
+  }
+
+  .navbar-brand {
+    color: white !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  .navbar-toggler-icon {
+    background-color: #ffffff;
+  }
+
+  .nav-link {
+    color: white !important;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link.active, .nav-link:hover {
+    color: #00d4ff !important;
+  }
+
+  /* Form Styles */
+  .container {
+    margin-top: 20px;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  h2.text-center {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #555;
+  }
+
+  .form-control {
+    border-radius: 5px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    transition: border 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+  }
+
+  /* Dropdown Style */
+  .form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    transition: border 0.3s ease;
+  }
+
+  .form-group select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+  }
+</style>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-dark">
+  <a class="navbar-brand" href="#">MediBridge Hospitals</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="javascript:void(0);" routerLink="/docdash">Back</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+  <h2 class="text-center">Add New Patient</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter Your Name" class="form-control" [(ngModel)]="patient.name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="text" id="age" name="age" placeholder="Enter Your Age" class="form-control" [(ngModel)]="patient.age" required />
+    </div>
+
+    <div class="form-group">
+      <label for="blood">Blood</label>
+      <input type="text" id="blood" name="blood" placeholder="Enter Your Blood Group" class="form-control" [(ngModel)]="patient.blood" required />
+    </div>
+
+    <div class="form-group">
+      <label for="prescription">Prescription</label>
+      <input type="text" id="prescription" name="prescription" placeholder="Enter Prescription" class="form-control" [(ngModel)]="patient.prescription" required />
+    </div>
+
+    <div class="form-group">
+      <label for="dose">Dose</label>
+      <input type="text" id="dose" name="dose" placeholder="Enter Your Dose" class="form-control" [(ngModel)]="patient.dose" required />
+    </div>
+
+    <div class="form-group">
+      <label for="fees">Fees</label>
+      <input type="text" id="fees" name="fees" placeholder="Enter Fees" class="form-control" [(ngModel)]="patient.fees" required />
+    </div>
+
+    <!-- Assigned Doctor Dropdown -->
+    <div class="form-group">
+      <label for="assignedDoctor">Assigned Doctor</label>
+      <select class="form-control" [(ngModel)]="patient.assignedDoctor" name="assignedDoctor" required style="height:auto">
+        <option value="" disabled>Select a Doctor</option>
+        <option value="Dr. Akshaya (General Medicine)">Dr. Akshaya (General Medicine)</option>
+        <option value="Dr. Tulasi (Dermatologist)">Dr. Tulasi (Dermatologist)</option>
+        <option value="Dr. Vinutna (Cardiologist)">Dr. Vinutna (Cardiologist)</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>

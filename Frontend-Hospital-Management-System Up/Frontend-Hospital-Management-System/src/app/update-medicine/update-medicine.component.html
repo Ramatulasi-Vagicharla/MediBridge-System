@@ -1,0 +1,114 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg py-3">
+  <a class="navbar-brand" href="#" style="color: white; font-weight: bold; font-size: 24px;">MediBridge Hospitals</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+              <a class="nav-link active" href="javascript:void(0);" style="color: white;" routerLink="/docdash">Back</a>
+          </li>
+      </ul>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <h2 class="text-center text-primary mb-4" style="font-size: 32px; font-weight: 600;">Update Medicine</h2>
+
+  <form (ngSubmit)="onSubmit()" class="form-container">
+      <div class="form-group mb-4">
+          <label for="drugName" class="form-label">Drug Name</label>
+          <input type="text" id="drugName" name="drugName" placeholder="Enter Medicine Name" class="form-control" [(ngModel)]="medicine.drugName" required />
+      </div>
+
+      <div class="form-group mb-4">
+          <label for="stock" class="form-label">Stock</label>
+          <input type="number" id="stock" name="stock" placeholder="Enter Stock" class="form-control" [(ngModel)]="medicine.stock" required />
+      </div>
+
+      <button type="submit" class="btn btn-success btn-lg w-100 mt-4">Submit</button>
+  </form>
+</div>
+
+<!-- Additional custom styles -->
+<style>
+  body {
+      background-color: #f8f9fa;
+      font-family: 'Arial', sans-serif;
+  }
+
+  .navbar {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .container {
+      max-width: 600px;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-top: 50px;
+  }
+
+  .form-container {
+      padding: 40px;
+      background-color: white;
+      border-radius: 10px;
+  }
+
+  .form-group {
+      margin-bottom: 20px;
+  }
+
+  .form-label {
+      font-weight: 600;
+      font-size: 16px;
+      color: #495057;
+  }
+
+  .form-control {
+      font-size: 14px;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid #ced4da;
+      transition: all 0.3s ease;
+  }
+
+  .form-control:focus {
+      border-color: #28a745;
+      box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+  }
+
+  button[type="submit"] {
+      font-size: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border: none;
+  }
+
+  button[type="submit"]:hover {
+      background-color: #218838;
+      transform: translateY(-2px);
+  }
+
+  button[type="submit"]:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+  }
+
+  h2 {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+  }
+
+  .btn-lg {
+      font-size: 18px;
+      font-weight: 600;
+  }
+
+  .mt-4 {
+      margin-top: 20px;
+  }
+</style>

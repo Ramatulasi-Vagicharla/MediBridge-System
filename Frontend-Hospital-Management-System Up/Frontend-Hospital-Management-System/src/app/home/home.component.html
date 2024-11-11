@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome Link for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    /* Global Styles */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensure the modal is above other content */
+  }
+  
+  /* Card Popup Styling */
+  .card {
+    background-color: #fff;
+    padding: 20px;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card h2 {
+    text-align: center;
+    margin-top: 0;
+  }
+  
+  .card div {
+    margin-bottom: 15px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  button[type="button"] {
+    background-color: #dc3545; /* Cancel button color */
+  }
+  
+  button[type="submit"] {
+    background-color: #007bff; /* Book button color */
+  }
+
+body{
+  overflow-x: hidden;
+}
+/* Navbar Styling */
+/* Navbar Styling */
+.navbar {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 1000;
+    height: 75px;
+   padding:50px;
+}
+
+/* Hover Effect for Navbar */
+.navbar:hover {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+}
+
+/* Brand Title Styling */
+.navbar-brand {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #f8f9fa;
+    margin:0;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 1px;
+    position: absolute;
+    top: 24px;
+}
+
+/* Side Panel Button Icon */
+.side-panel-btn {
+    position: fixed;
+    right: 20px; /* Align to top-right */
+    top: 1px; /* Fixed at the top of the page */
+    /* background: rgba(216, 216, 222, 0.9); */
+    border: none;
+    font-size: 2em;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 50%;
+    /* box-shadow: 0 4px 8px rgba(92, 149, 190, 0.4); */
+    cursor: pointer;
+    z-index: 1050;
+}
+
+/* Hidden Checkbox to toggle the side panel */
+.menu-toggle {
+    display: none; /* Hide the checkbox */
+}
+
+/* Side Panel for Login Buttons */
+.side-login-container {
+    position: fixed;
+    right: -300px; /* Initially hidden to the right */
+    top: 20px; /* Keep panel aligned with the icon */
+    transform: translateY(0);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* /background-color: rgba(0, 0, 0, 0.9);/ */
+    padding: 20px;
+    
+    transition: right 0.3s ease; /* Change 'left' to 'right' to slide from right */
+    z-index: 1040;
+    height:180px;
+}
+
+/* Button Styling Inside Side Panel */
+.side-login-container .btn {
+    background-color: rgba(118, 124, 243, 0.9);
+    border: none;
+    font-size: 0.9em;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(92, 149, 190, 0.4);
+    margin: 10px 0;
+}
+
+/* Hover Effect for Buttons */
+.side-login-container .btn:hover {
+    background-color: rgb(84, 115, 210);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(64, 133, 150, 0.6);
+}
+
+/* Icons inside buttons */
+.side-login-container .btn i {
+    margin-right: 6px;
+    font-size: 1.2em;
+}
+
+/* Add a subtle animation on page load */
+.navbar-brand, .side-login-container .btn {
+    animation: fadeIn 1s ease-out;
+}
+
+/* Add animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Show the side panel when the checkbox is checked */
+.menu-toggle:checked + .side-panel-btn + .side-login-container {
+    right: 0; /* Slide in the panel */
+}
+
+/* Optional: Make sure the side panel stays visible on click */
+.menu-toggle:checked + .side-panel-btn {
+    /*background: rgba(84, 115, 210, 1);
+      Change icon color when active */
+}
+
+
+/* Services Section Styling */
+#services {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#services h2 {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.services-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.service {
+    width: 250px;
+    padding: 20px;
+    background-color: #f7f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.service:hover {
+    transform: translateY(-5px);
+}
+
+.service i {
+    font-size: 40px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.service h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.service p {
+    font-size: 14px;
+    color: #666;
+}
+
+
+/* Testimonials Section */
+#testimonials {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#testimonials h2 {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.9); /* White with slight transparency */
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 15px auto;
+    width: 80%;
+    max-width: 400px;
+}
+
+.card p {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.card h4 {
+    color: #007bff;
+}
+
+/* Footer Styling */
+/* Footer Styling */
+footer {
+    background-color: #00233a;
+    color: white;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0px 0px;
+}
+
+
+.footer-middle div
+ {
+   flex:1;
+    margin: 0 1px;
+    width: auto;
+    
+}
+.footer-middle {
+    display: flex;
+    justify-content: space-between; /* Distribute the columns evenly */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 60px; 
+    /* Optional: Adds space between the columns */
+}
+/* footer-left{
+    width: 14%;
+    padding: 10px;
+} */
+.footer-logo {
+    width: 150px;
+    margin-bottom: 10px;
+}
+
+.appointment-card {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+  }
+
+.footer-left h4 {
+    color: #ffcc00;
+}
+
+.footer-left p,
+.footer-left h4,
+.footer-right h4 {
+    margin-bottom: 10px;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 5px;
+}
+
+.newsletter-form input {
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    width: 70%;
+}
+
+.newsletter-form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.footer-middle h4 {
+    color: #ffcc00;
+    margin-bottom: 10px;
+}
+
+.footer-middle ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-middle li {
+    margin-bottom: 5px;
+}
+
+.footer-middle a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+.footer-middle a:hover {
+    text-decoration: underline;
+}
+
+.social-links {
+    margin: 10px 0;
+}
+
+.social-links a {
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+.social-links a:hover {
+    color: #ffffff;
+}
+
+/* Chatbot Button */
+.chatbot-button {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.chatbot-button:hover {
+    transform: scale(1.05);
+}
+
+.book-app-button {
+    position: fixed;
+    
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    bottom:110px;
+    z-index: 10;
+}
+
+.book-app-button:hover {
+    transform: scale(1.05);
+}
+
+/* FAQ Section Styling */
+#faq {
+    text-align: center;
+    margin-bottom: 60px;
+    background-color: #f4f6f9; /* Light grey background for a clean look */
+    padding: 30px 20px;
+}
+
+#faq h2 {
+    font-weight: 700;
+    color: #2c3e50; /* Darker color for the header */
+    margin-bottom: 30px;
+    font-size: 1.8em;
+}
+
+.accordion {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-item {
+    margin-bottom: 12px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-item input {
+    display: none; /* Hide checkbox inputs */
+}
+
+.accordion-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    text-align: left;
+    background-color: #52a2b8; /* Soft blue background */
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.1em;
+}
+
+.accordion-question:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+.accordion-question .icon {
+    font-size: 1.5em;
+    transition: transform 0.3s ease;
+}
+
+.accordion-item input:checked + .accordion-question .icon {
+    transform: rotate(45deg); /* Rotate the icon when expanded */
+}
+
+.accordion-answer {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 15px;
+    background-color: #ecf0f1; /* Light grey background for answers */
+    color: #333;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.accordion-answer p {
+    margin: 12px 0;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.accordion-item input:checked + .accordion-question + .accordion-answer {
+    max-height: 150px; /* Set a max height to allow transition effect */
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .accordion {
+        width: 90%;
+    }
+
+    #faq h2 {
+        font-size: 1.6em;
+    }
+
+    .accordion-question {
+        font-size: 1em;
+    }
+
+    .accordion-answer p {
+        font-size: 0.9em;
+    }
+}
+
+/* Scroll-to-Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(118, 124, 243, 0.9);
+    color: white;
+    padding: 12px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(92, 149, 190, 0.4);
+    display: none;
+    transition: background-color 0.3s ease;
+    z-index: 1050;
+}
+
+.scroll-to-top:hover {
+    background-color: rgb(84, 115, 210);
+}
+
+/* Show Button When Scrolling Down */
+.scroll-to-top.show{
+  display: block;
+}
+
+/* Smooth Scroll to Top */
+.scroll-to-top:hover {
+    transform: translateY(-2px);
+}
+
+.scroll-to-top i {
+    margin-top: 4px;
+}
+
+/* Appointment Booking Section */
+.book-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(118, 124, 243, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-btn:hover {
+            background-color: rgba(84, 115, 210, 0.8);
+        }
+
+        /* Hidden input checkbox to toggle form visibility */
+        #toggle-appointment {
+            display: none;
+        }
+
+        /* News & Events Section */
+        .news-events-section {
+            padding: 50px;
+            background-color: #fff;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .news-events-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px;
+            list-style: none;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            width: 2px;
+            background-color: #ccc;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 20px 0;
+            padding-left: 50%;
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+        }
+
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: -8px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #5c6bc0;
+        }
+
+        .timeline-item .content {
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            padding: 20px;
+            width: 40%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .timeline-item .content h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .timeline-item .content p {
+            font-size: 1.1em;
+        }
+
+        .timeline-item .content .date {
+            font-size: 1em;
+            font-weight: bold;
+            color: #7a7a7a;
+            margin-top: 10px;
+        }
+
+        /* Hover effect */
+        .timeline-item:hover .content {
+            transform: translateX(10px);
+            opacity: 0.9;
+        }
+
+        /* Adjust the left/right content positioning */
+        .timeline-item:nth-child(even) {
+            padding-left: 0;
+            padding-right: 50%;
+            justify-content: flex-end;
+        }
+
+        .timeline-item:nth-child(even):after {
+            left: auto;
+            right: -8px;
+        }
+
+        /* Optional: Adjust layout for small screens */
+        @media (max-width: 768px) {
+            .timeline-item {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .timeline-item .content {
+                width: 90%;
+            }
+        }
+        
+
+</style>
+</head>
+
+<body>
+  <!-- Scroll to Top Button -->
+<div id="scroll-to-top" class="scroll-to-top">
+  <i class="fas fa-chevron-up"></i>
+</div>
+
+
+  <header class="navbar">
+    <div class="navbar-container">
+      <img src="assets/logo.png" alt="MediBridge Logo" class="footer-logo" style="filter: opacity(0.9); margin-top:-51px;">
+        <h1 class="navbar-brand">MediBridge Hospitals</h1>
+    </div>
+</header>
+
+
+<!-- Hidden Checkbox to toggle the side panel visibility -->
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+<!-- Side Panel Button Icon (Hamburger icon) -->
+<label for="menu-toggle" class="side-panel-btn">
+    
+  <i class="fa-solid fa-users" style="color: white;"></i> <!-- Hamburger icon to toggle panel -->
+</label>
+
+<!-- Side Panel for Login Buttons -->
+<div class="side-login-container">
+    <button class="btn btn-danger" style="margin-top:20px;">
+        <a style="color: white;" href="javascript:void(0);" routerLink="/doclogin">
+            <i class="fas fa-user-md"></i> Login as Doctor
+        </a>
+    </button>
+    <button class="btn btn-danger">
+        <a style="color:white;" href="javascript:void(0);" routerLink="/adlogin">
+            <i class="fas fa-user-shield"></i> Login as Admin
+        </a>
+    </button>
+</div>
+
+  
+  
+    <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+            
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+              <img src="assets/1.gif" height="600px" width="auto" class="d-block w-100" alt="...">
+              <div class="mb-25 carousel-caption d-none d-md-block text-start" style="left: 20px; right:auto; bottom:120px">
+                  <!-- <button class="mb-5 btn btn-secondary btn-lg">
+                      <h2>Welcome to MediBridge Hospitals</h2>
+                  </button>
+                  <p></p>
+                  <button class="btn btn-danger">10000+ Healing Hands</button>&nbsp;
+                  <button class="btn btn-primary">Advanced Treatment</button>&nbsp;
+                  <button class="btn btn-success">Best Clinical Outcomes</button> -->
+              </div>
+          </div>
+      </div>
+    </div>
+
+    
+    
+
+    <div class="container my-4">
+        <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static" style="background-color: rgb(250, 227, 231); box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+                  
+                  <h3 class="mb-0">Where Compassion Meets Excellence in Healthcare</h3>
+                  
+                  <p class="card-text mb-auto">“Our commitment to care goes beyond treatment — it’s about enhancing lives through compassion and expertise.”
+
+                  </p>
+                  
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                  <img class="bd-placeholder-img" width="200" height="250" src="assets/4.jpg" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static" style="background-color: rgb(250, 227, 231); box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+                  <strong class="d-inline-block mb-2 text-success"></strong>
+                  <h3 class="mb-0">A Legacy of Trust, A Vision for Wellness</h3>
+                
+                  <p class="mb-auto">“Rooted in excellence and guided by compassion, we are here to keep you in the best of health.”</p>
+                
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img class="bd-placeholder-img" width="200" height="250" src="assets/trust.jpeg" alt="">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static" style="background-color: rgb(250, 227, 231); box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+                  <strong class="d-inline-block mb-2 text-danger"></strong>
+                  <h3 class="mb-0">Healing Beyond Boundaries</h3>
+                  
+                  <p class="card-text mb-auto">“Whether it’s a simple procedure or complex surgery, our approach is always comprehensive and personalized.” </p>
+                  
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                  <img class="bd-placeholder-img" width="200" height="250" src="assets/6.jpg" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static" style="background-color: rgb(250, 227, 231); box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+                  <strong class="d-inline-block mb-2 text-warning"></strong>
+                  <h3 class="mb-0">MediBridge Never Sleeps</h3>
+                  
+                  <p class="mb-auto">Get the most advance emergency care anywhere in minutes just. For free ambulence service dial "108"</p>
+                  
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img class="bd-placeholder-img" width="200" height="250" src="assets/7.png" alt="">
+
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  
+
+    
+
+    <!-- Our Services Section -->
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="services-container">
+      <div class="service">
+          <i class="fas fa-hospital-user"></i>
+          <h3>Outpatient Services</h3>
+          <p>We provide a range of outpatient services, from diagnostics to treatment, ensuring high-quality care for all patients.</p>
+      </div>
+      <div class="service">
+          <i class="fas fa-procedures"></i>
+          <h3>Inpatient Care</h3>
+          <p>Our inpatient services include round-the-clock monitoring, advanced medical treatments, and personalized care.</p>
+      </div>
+      <div class="service">
+          <i class="fas fa-ambulance"></i>
+          <h3>Emergency Services</h3>
+          <p>Our emergency department is equipped to handle critical cases with efficiency, compassion, and state-of-the-art technology.</p>
+      </div>
+      <div class="service">
+          <i class="fas fa-stethoscope"></i>
+          <h3>Diagnostic Services</h3>
+          <p>We offer comprehensive diagnostic services including lab tests, imaging, and specialized screenings.</p>
+      </div>
+  </div>
+</section>
+
+      <h2 class="text-center mb-4">About Us</h2>
+      <p class="text-center">At MediBridge Hospitals, we believe in delivering high-quality healthcare with compassion. Our dedicated team of healthcare professionals is committed to providing exceptional services to improve the health and well-being of our community.</p>
+
+      <h2 class="text-center mb-4">Testimonials</h2>
+      <div class="row">
+          <div class="col-md-6">
+              <div class="card mb-4" style="border: 2px solid green">
+                  <div class="card-body">
+                      <p class="card-text">"The staff at MediBridge Hospitals were incredible. They took such good care of me during my recovery!" - <strong>Mukundh</strong></p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="card mb-4" style="border: 2px solid green">
+                  <div class="card-body">
+                      <p class="card-text">"I appreciate the prompt attention and excellent service. Highly recommend!" - <strong>Indhu</strong></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+ <!-- FAQ Section -->
+<section id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <div class="accordion">
+    <div class="accordion-item">
+      <input type="checkbox" id="question1">
+      <label for="question1" class="accordion-question">
+        <span class="icon">+</span> What services do you offer?
+      </label>
+      <div class="accordion-answer">
+        <p>We offer outpatient services, inpatient care, emergency services, and more.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <input type="checkbox" id="question2">
+      <label for="question2" class="accordion-question">
+        <span class="icon">+</span> How can I make an appointment?
+      </label>
+      <div class="accordion-answer">
+        <p>You can make an appointment through our website or by calling our contact number.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <input type="checkbox" id="question3">
+      <label for="question3" class="accordion-question">
+        <span class="icon">+</span> Do you accept insurance?
+      </label>
+      <div class="accordion-answer">
+        <p>Yes, we accept a variety of insurance plans. Please contact us for more details.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- News and Events Section -->
+<section class="news-events-section">
+  <h2>Latest News & Events</h2>
+  <ul class="timeline">
+      <!-- Timeline Item 1 -->
+      <li class="timeline-item">
+          <div class="content">
+              <h3>New Hospital Wing Inaugurated</h3>
+              <p>Our newly expanded hospital wing is now open, offering more beds and state-of-the-art medical equipment to serve our community better.</p>
+              <span class="date">March 15, 2024</span>
+          </div>
+      </li>
+      
+      <!-- Timeline Item 2 -->
+      <li class="timeline-item">
+          <div class="content">
+              <h3>Health Awareness Campaign</h3>
+              <p>Join us for a series of workshops and seminars on health and wellness, where our experts will provide valuable insights.</p>
+              <span class="date">March 20, 2024</span>
+          </div>
+      </li>
+      
+      <!-- Timeline Item 3 -->
+      <li class="timeline-item">
+          <div class="content">
+              <h3>New Medical Technology Introduction</h3>
+              <p>We are proud to introduce the latest advancements in medical technology that will help us provide even better patient care.</p>
+              <span class="date">March 22, 2024</span>
+          </div>
+      </li>
+
+      <!-- Timeline Item 4 -->
+      <li class="timeline-item">
+          <div class="content">
+              <h3>Free Health Checkup Camp</h3>
+              <p>We're organizing a free health checkup camp for the community. Come and get your health checked by our qualified doctors.</p>
+              <span class="date">April 5, 2024</span>
+          </div>
+      </li>
+  </ul>
+</section>
+
+<section id="location" width="auto">
+  <h2>Our Location</h2>
+  <iframe src="https://www.google.com/maps/embed?pb=YOUR_GOOGLE_MAP_LINK" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+</section>
+
+  <!-- <footer>
+    <div class="container contact-info" style="max-width: 1200px; margin: 0 auto;">
+        <h4>Contact Us</h4>
+        <p>Phone: <strong>8567898111,</strong> Email: <strong><a href="mailto:akshayakolla0099@gmail.com" style="color: white; text-decoration: none;">akshayakolla0099&#64;gmail.com</a></strong></p>
+        <p>Address: <strong>Araku, Vishakapatnam, Andhra Pradesh, 531151</strong></p>
+        <p>Emergency Contact: <strong>108</strong></p>
+    </div>
+    
+   
+    <h4>Follow Us</h4>
+    <div class="social-links">
+        <a href="https://www.facebook.com" target="_blank">Facebook</a> |
+        <a href="https://www.twitter.com" target="_blank">Twitter</a> |
+        <a href="https://www.instagram.com" target="_blank">Instagram</a>
+    </div>
+    <p style="margin: 5px 0;">© 2024-2025 Medi
+Bridge Hospitals. All rights reserved.</p>
+</footer> -->
+<footer>
+  <div class="footer-container">
+      
+      <div class="footer-middle">
+        <div class="footer-column">
+            <img src="assets/logo.png" alt="MediBridge Logo" class="footer-logo" style="filter: opacity(0.9)">
+            <p>Get a Lot of Information About Us</p>
+            <h4>Subscribe Our Newsletter</h4>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Submit</button>
+            </form>
+            <p>Emergency: <strong>108</strong></p>
+            <p>Contact: <strong>8567898111</strong></p>
+        </div>
+          <div class="footer-column">
+              <h4>Patient Care</h4>
+              <ul>
+                  <li><a href="#">Find a Doctor</a></li>
+                  <li><a href="#">Medical Services</a></li>
+                  <li><a href="#">Patient Testimonials</a></li>
+                  <li><a href="#">Apollo Surgery</a></li>
+              </ul>
+          </div>
+          <div class="footer-column">
+              <h4>Centers of Excellence</h4>
+              <ul>
+                  <li><a href="#">Cardiology</a></li>
+                  <li><a href="#">Dermatology</a></li>
+                  <li><a href="#">General Medicine</a></li>
+                  <li><a href="#">Neurology</a></li>
+              </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+                <a href="https://www.facebook.com" target="_blank">Facebook</a> |
+                <a href="https://www.twitter.com" target="_blank">Twitter</a> |
+                <a href="https://www.instagram.com" target="_blank">Instagram</a>
+            </div>
+            <p>© 2024-2025 MediBridge Hospitals. All rights reserved.</p>
+        </div>
+      </div>
+
+      <!-- Right Section: Social Media and Copyright -->
+      
+  </div>
+
+  <!-- Chatbot Button -->
+
+</footer>
+<a href="tel:+91108" class="book-app-button" style="bottom:60px;">
+    <span>Emergency: 108</span>
+</a>
+<div *ngIf="showCard" class="modal-overlay">
+    <div class="card">
+      <h2>Book an Appointment</h2>
+      <form (submit)="sendEmail()">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" [(ngModel)]="name" name="name" required />
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" [(ngModel)]="email" name="email" required />
+        </div>
+        <div>
+          <label for="phone">Phone:</label>
+          <input type="tel" id="phone" [(ngModel)]="phone" name="phone" required />
+        </div>
+        <div class="button-group">
+          <button type="button" (click)="cancel()">Cancel</button>
+          <button type="submit">Book</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <button (click)="showCard = true" class="book-app-button">Book an appointment</button>
+  
+<a href="https://share.chatling.ai/s/7rtdSXiPS7P3Ue5" target="_blank" class="chatbot-button">
+    <span>Chat with us</span>
+</a>
+  
+    <!--footer>
+
+      <div class="container contact-info" style="max-width: 1200px; margin: 0 auto;">
+          <h4>Contact Us</h4>
+          <p>Phone: <strong>8567898111,</strong> Email: <strong><a href="mailto:akshayakolla0099@gmail.com" style="color: white; text-decoration: none;">akshayakolla0099&#64;gmail.com</a></strong></p>
+         
+          <p>Address: <strong>Araku, Vishakapatnam, Andhra Pradesh, 531151</strong></p>
+          <p>Emergency Contact: <strong>108</strong></p>
+      </div>
+      <h4>Follow Us</h4>
+      <div class="social-links">
+          <a href="https://www.facebook.com" target="_blank">Facebook</a> |
+          <a href="https://www.twitter.com" target="_blank">Twitter</a> |
+          <a href="https://www.instagram.com" target="_blank">Instagram</a>
+      </div>
+      <p style="margin: 5px 0;">© 2024-2025 MediBridge Hospitals, Inc.</p>
+  </footer-->

@@ -1,0 +1,184 @@
+<style>
+  /* Navbar Styles */
+  .navbar {
+    background-color: #2c3e50;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .navbar-brand {
+    color: #ffffff !important;
+    font-size: 1.8rem;
+    font-weight: 700;
+    transition: color 0.3s;
+  }
+  .navbar-brand:hover {
+    color: #1abc9c !important;
+  }
+  .nav-link {
+    color: #ffffff !important;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-right: 15px;
+    transition: color 0.3s;
+  }
+  .nav-link:hover {
+    color: #1abc9c !important;
+  }
+  .btn-danger {
+    font-weight: bold;
+    background-color: #e74c3c;
+    border: none;
+  }
+  .btn-danger:hover {
+    background-color: #c0392b;
+  }
+
+  /* Dashboard Title and Marquee */
+  .dashboard-title {
+    font-weight: 700;
+    color: #34495e;
+    font-size: 2rem;
+    margin: 20px 0;
+    text-align: center;
+  }
+  .marquee-text {
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  /* Table Styles */
+  .tableFixHead {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #f8f9fa;
+  }
+  .table-header th {
+    background-color: #34495e;
+    color: #ffffff;
+    padding: 10px;
+    font-weight: 600;
+  }
+  .table td, .table th {
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+  }
+  .table-striped tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+
+  /* Button Styles */
+  .btn-info {
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    font-weight: 600;
+    transition: transform 0.2s;
+  }
+  .btn-info:hover {
+    background-color: #2980b9;
+    transform: scale(1.02);
+  }
+  .btn-danger {
+    background-color: #e74c3c;
+    color: #ffffff;
+    border: none;
+    font-weight: 600;
+    transition: transform 0.2s;
+  }
+  .btn-danger:hover {
+    background-color: #c0392b;
+    transform: scale(1.02);
+  }
+  .btn-success {
+    background-color: #2ecc71;
+    color: #ffffff;
+    border: none;
+    font-weight: 600;
+    transition: transform 0.2s;
+  }
+  .btn-success:hover {
+    background-color: #27ae60;
+    transform: scale(1.02);
+  }
+
+  /* Button Spacing and Alignment */
+  .action-buttons button {
+    margin-right: 10px;
+  }
+</style>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-dark">
+  <a class="navbar-brand" href="#">MediBridge Hospitals</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" routerLink="/appointment-list">View Appointments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" routerLink="/create-patient">Add Patient</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" routerLink="/view-medicine">View Medicines</a>
+      </li>
+    </ul>
+    <button class="btn btn-danger" (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+<!-- Dashboard Content -->
+<div class="container mt-4">
+  <h2 class="dashboard-title">Dashboard</h2>
+  <marquee class="marquee-text" behavior="scroll" direction="left">
+    Welcome to Dashboard. Please find the patient list available below! Click "Add Patient" to add patients, or "View Medicines" to view and update medicines.
+  </marquee>
+  <hr>
+  <h3 class="mt-4 mb-3 text-secondary">Current Patient List in Your Queue</h3>
+  <div class="tableFixHead">
+    <table class="table table-striped">
+      <thead class="table-header">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Blood Type</th>
+          <th>Prescription</th>
+          <th>Urgency</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of patients">
+          <td>{{patient.id}}</td>
+          <td>{{patient.name}}</td>
+          <td>{{patient.age}}</td>
+          <td>{{patient.blood}}</td>
+          <td>{{patient.prescription}}</td>
+          <td>
+            <span [ngClass]="{
+              'badge bg-danger': patient.urgency === 'High',
+              'badge bg-warning': patient.urgency === 'Medium',
+              'badge bg-success': patient.urgency === 'Low'
+            }">
+              {{patient.urgency}}
+            </span>
+          </td>
+          <td class="action-buttons">
+            <button (click)="update(patient.id)" class="btn btn-info me-2">Update</button>
+            <button (click)="delete(patient.id)" class="btn btn-danger me-2">Delete</button>
+            <button (click)="view(patient.id)" class="btn btn-success">View</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

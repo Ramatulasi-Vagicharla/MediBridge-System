@@ -1,0 +1,245 @@
+<!-- <nav style="margin:auto" class="navbar navbar-expand-lg bg-dark">
+        
+  <a style="color: white;" class="navbar-brand" href="#">MediBridge Hospitals</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+          <a style="color: white;"class="nav-link active" aria-current="page" href="javascript:void(0);" routerLink="/appointmentlist">Appointments</a>
+        </li>
+
+          <li>
+           
+        
+              <button style="margin: 5px;" class="btn btn-danger" (click)="logout()">Logout</button>
+              
+          
+            
+          </li>
+      </ul>
+ </div>
+</nav>
+<div class="container">
+<hr>
+  <h2 style="text-align: center;margin-top: 20PX;">Admin Dashboard</h2>
+  <a style="color: rgb(86, 86, 86); font-size: x-large;"><marquee behavior="scroll" direction="left">
+    Welcome to Admin Dashboard. Please find the patient list below!!. Click Appointments to view and update Appointments, Click Add Appointment to add new Appointment</marquee></a>
+<hr>
+  <a style="color: rgb(86, 86, 86); font-size: xx-large;">Current Patient List in the Queue</a>
+<div class="tableFixHead">
+<br>
+<table class="table table-striped">
+
+    <thead>
+    
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>age</th>
+            <th>Fees</th>
+            <th>urgency</th>
+            <th>Action</th>
+
+        </tr>
+
+
+    </thead>
+    <tbody>
+
+        <tr  *ngFor="let patient of  patients" >
+           <td>{{patient.id}}</td>
+           <td>{{patient.name}}</td>
+           <td>{{patient.age}}</td>
+           <td>{{patient.fees}}</td>
+           <td>{{patient.urgency}}</td>
+           <td>
+
+            <button (click)="delete(patient.id)" class="btn btn-danger">Delete</button>
+           </td>
+
+
+
+
+
+        </tr>
+
+    </tbody>
+
+
+
+</table> -->
+<style>
+  /* Navbar Styles */
+  .navbar {
+    background-color: #343a40; /* Dark grey background for a balanced, professional look */
+  }
+  .navbar-brand {
+    color: #00d4ff !important; /* Light blue for brand emphasis */
+    font-weight: 700;
+    font-size: 1.8rem;
+    transition: color 0.3s;
+  }
+  .navbar-brand:hover {
+    color: #00a3cc !important; /* Slightly darker blue on hover */
+  }
+  .nav-link {
+    font-size: 1.2rem;
+    color: #ffffff !important;
+    transition: color 0.3s;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: #00d4ff !important;
+  }
+  .btn-logout {
+    background-color: #da8080;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  .btn-logout:hover {
+    background-color: #6896ec;
+    transform: scale(1.05);
+  }
+
+  /* Card Styles */
+  .card-custom {
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  .card-custom:hover {
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Table Styles */
+  .table th, .table td {
+    vertical-align: middle;
+    font-size: 1rem;
+  }
+  .table thead {
+    background-color: #343a40;
+    color: #ffffff;
+  }
+  .table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  .badge {
+    font-size: 0.9rem;
+    padding: 0.5em 1em;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  .badge:hover {
+    transform: scale(1.05);
+  }
+  .bg-danger { background-color: #e60000 !important; }
+  .bg-warning { background-color: #ffcc00 !important; }
+  .bg-success { background-color: #28a745 !important; }
+
+  /* Button Styles */
+  .btn-delete {
+    color: #e4725d;
+    border-color: #ff5c5c;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+  }
+  .btn-delete:hover {
+    background-color: #3d67a6;
+    color: #ffffff;
+    transform: scale(1.1);
+  }
+
+  /* Typography */
+  .text-highlight {
+    color: #007bff;
+    font-weight: 700;
+  }
+  .welcome-text {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+  }
+</style>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="#">MediBridge Hospitals</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <!-- Existing Appointments Link -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/appointmentlist" routerLinkActive="active" aria-current="page">Appointments</a>
+        </li>
+        
+        <!-- New Room Management Link -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/roommanagement" routerLinkActive="active">Room Management</a>
+        </li>
+        
+        <!-- Logout Button -->
+        <li class="nav-item">
+          <button class="btn btn-logout ms-3" (click)="logout()">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Main Content -->
+<div class="container mt-5">
+  <div class="card card-custom p-5">
+    <h2 class="text-center text-highlight mb-4">Admin Dashboard</h2>
+    <p class="text-center welcome-text">
+      Welcome to the Admin Dashboard! Easily manage patient appointments and queues.
+    </p>
+    <div class="form-group">
+      <label for="doctorSelect">Filter by Doctor:</label>
+      <select id="doctorSelect" class="form-control" [(ngModel)]="selectedDoctor" (change)="getPatientsByDoctor()">
+        <option value="">Select Doctor</option>
+        <option *ngFor="let doctor of doctors" [value]="doctor">{{doctor}}</option>
+      </select>
+    </div>
+    <hr class="my-4">
+    <h3 class="text-secondary mb-3">Current Patient Queue</h3>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle text-center">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Fees (₹)</th>
+            <th>Urgency</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let patient of patients">
+            <td>{{patient.id}}</td>
+            <td>{{patient.name}}</td>
+            <td>{{patient.age}}</td>
+            <td>₹{{patient.fees | number:'1.0-2'}}</td>
+            <td>
+              <span class="badge" [ngClass]="{
+                'bg-danger': patient.urgency === 'High',
+                'bg-warning': patient.urgency === 'Medium',
+                'bg-success': patient.urgency === 'Low'
+              }">
+                {{patient.urgency}}
+              </span>
+            </td>
+            <td>
+              <button (click)="delete(patient.id)" class="btn btn-outline-danger btn-delete rounded-pill px-4 py-2">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
