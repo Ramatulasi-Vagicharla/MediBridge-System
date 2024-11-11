@@ -53,6 +53,8 @@ Each of these features is designed to optimize the healthcare workflow, enhance 
 - **Database**: MySQL
 - **Version Control**: Git and GitHub
 - **Build Tool**: Maven
+- **Api Tool**: PostMan
+  
 
 ## Getting Started
 
@@ -134,9 +136,9 @@ Once you have the application running, you can access it by navigating to `http:
 
 For questions, suggestions, or collaboration requests, please feel free to reach out:
 
-- **Project Maintainer**: [Vinutna_Polisetty]
-- **Email**: [vinutnapolisetty@gmail.com](mailto:vinutnapolisetty@gmail.com)
-- **LinkedIn**:https://www.linkedin.com/in/vinutna-polisetti-410a47215/
+- **Project Maintainer**: [Akvitu]
+- **Email**: [MediBridge@gmail.com](mailto:MediBridge@gmail.com)
+- **LinkedIn**:https://www.linkedin.com/
   
 For updates and more information, follow this repository and stay connected.
 
