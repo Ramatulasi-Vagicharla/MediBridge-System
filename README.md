@@ -2,6 +2,11 @@
 
 ## Overview
 The Medibridge System is a comprehensive healthcare management platform that enables efficient handling of patient information, doctor management, appointment scheduling, and other healthcare-related operations. Built using a Java full-stack approach, this project aims to streamline healthcare workflows and provide an intuitive interface for both patients and doctors.
+# Project Documentation
+
+## Documentation
+For detailed information about the project’s setup, features, and API endpoints, please refer to the [project documentation](https://docs.google.com/document/d/1dHZFr-Buf2F2hmwCWJo06lWuimryvmoYdwHOpJtj1C4/edit?tab=t.0).
+
 
 ## Table of Contents
 
@@ -46,6 +51,15 @@ The Medibridge System includes a variety of features designed to facilitate heal
 
 Each of these features is designed to optimize the healthcare workflow, enhance patient-doctor communication, and ensure that healthcare providers have quick, secure access to essential information.
 
+## Program Flow
+
+### Overview
+The program flow illustrates the interactions between the admin and doctors with the backend system. It highlights the sequence of actions performed by users (admin or doctor) to add appointments, patient data, medicines, or room assignments, with each action updating the relevant database table.
+
+### Program Flow Diagram
+The following diagram represents the process flow:
+
+![Program Flow Diagram](Program-flow.png)
 
 ## Tech Stack
 - **Frontend**: HTML, CSS, JavaScript, Angular
