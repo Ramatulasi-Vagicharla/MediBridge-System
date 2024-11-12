@@ -26,6 +26,7 @@ import { UpdateRoomComponent } from './update-room/update-room.component';
 import { AddRoomComponent } from './add-room/add-room.component';
 import { AdmindashComponent } from './admindash/admindash.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import { AdmindashComponent } from './admindash/admindash.component';
     RoomManagementComponent,
     AddRoomComponent,
     UpdateRoomComponent,
+   
   ],
   imports: [
     BrowserModule,

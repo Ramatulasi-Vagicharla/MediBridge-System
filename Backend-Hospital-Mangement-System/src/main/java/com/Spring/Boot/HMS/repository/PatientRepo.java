@@ -10,4 +10,5 @@ import com.Spring.Boot.HMS.entity.Patient;
 
 public interface PatientRepo extends JpaRepository<Patient, Long> {
     List<Patient> findByAssignedDoctor(String assignedDoctor);
+   
 }

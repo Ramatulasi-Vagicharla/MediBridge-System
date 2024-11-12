@@ -33,6 +33,7 @@ public class Patient {
 	@Column(name = "assigned_doctor")
 	private String assignedDoctor;
 
+
 	public Patient() {
 	}
 
@@ -46,8 +47,10 @@ public class Patient {
 		this.fees = fees;
 		this.urgency = urgency;
 		this.assignedDoctor = assignedDoctor;
+	
 	}
 
+	
 	public String getName() {
 		return name;
 	}

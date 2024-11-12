@@ -20,6 +20,7 @@ import { EditAppointmentComponent } from './edit-appointment/edit-appointment.co
 import { RoomManagementComponent } from './room-management/room-management.component';
 import { AddRoomComponent } from './add-room/add-room.component';
 import { UpdateRoomComponent } from './update-room/update-room.component';
+
 const routes: Routes = [
   { path: 'admin', component: AdmindashComponent,canActivate:[AdminauthguardService] },
   {
