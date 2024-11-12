@@ -59,7 +59,7 @@ The program flow illustrates the interactions between the admin and doctors with
 ### Program Flow Diagram
 The following diagram represents the process flow:
 
-![Program Flow Diagram](Program-flow.png)
+![Program Flow Diagram](flow chart.png)
 
 ## Tech Stack
 - **Frontend**: HTML, CSS, JavaScript, Angular
