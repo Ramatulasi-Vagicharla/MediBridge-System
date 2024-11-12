@@ -16,7 +16,7 @@ export class AddRoomService {
     return this.http.post<Room>(this.apiUrl, room);
   }
 
-  // Get all rooms (Optional for Room Management)
+  // Get all rooms 
   getAllRooms(): Observable<Room[]> {
     return this.http.get<Room[]>(this.apiUrl);
   }

@@ -1,4 +1,4 @@
-// room.model.ts
+
 export interface Room {
  
     id: number;
