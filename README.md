@@ -59,7 +59,7 @@ The program flow illustrates the interactions between the admin and doctors with
 ### Program Flow Diagram
 The following diagram represents the process flow:
 
-![Program Flow Diagram](flow-diagram.png)
+![Program Flow Diagram](https://github.com/20101113/MediBridge-System/blob/main/flow%20chart.png)
 
 
 ## Tech Stack
