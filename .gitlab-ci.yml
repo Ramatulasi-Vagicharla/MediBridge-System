@@ -1,0 +1,61 @@
+# Define the Docker image for the CI/CD pipeline
+image: maven:3.6.3-jdk-8  # Use Maven image for building Spring Boot application
+
+stages:
+  - build
+  - test
+  - deploy
+
+# Spring Boot build stage
+build_spring_boot:
+  stage: build
+  script:
+    - mvn clean install  # Builds the Spring Boot application using Maven
+
+# Angular build stage
+build_angular:
+  image: node:14  # Use Node.js image for Angular build
+  stage: build
+  script:
+    - npm install  # Install Angular dependencies
+    - ng build --prod  # Build Angular app for production
+
+# Test the Spring Boot application
+test_spring_boot:
+  image: maven:3.6.3-jdk-8
+  stage: test
+  script:
+    - mvn test  # Run unit tests for the Spring Boot application
+
+# Test the Angular application
+test_angular:
+  image: node:14
+  stage: test
+  script:
+    - npm install  # Install Angular dependencies
+    - ng test --watch=false  # Run tests for Angular app
+
+# MySQL setup for testing purposes
+services:
+  - mysql:5.7  # Use the MySQL Docker image for testing
+
+variables:
+  MYSQL_ROOT_PASSWORD: root_password  # Set MySQL root password for testing
+  MYSQL_DATABASE: test_db  # Set the name of the database for testing
+
+# Spring Boot app integration test with MySQL
+integration_test_spring_boot:
+  stage: test
+  image: maven:3.6.3-jdk-8
+  script:
+    - mvn clean install  # Install dependencies and build
+    - mvn verify  # Run integration tests against MySQL database
+
+# Deploy stage (optional)
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying your app"
+    # Add your actual deployment commands here (e.g., to AWS, Heroku, etc.)
+    # Example for AWS Elastic Beanstalk:
+    # - eb deploy
