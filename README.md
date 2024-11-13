@@ -156,4 +156,11 @@ For questions, suggestions, or collaboration requests, please feel free to reach
 - **LinkedIn**:https://www.linkedin.com/
   
 For updates and more information, follow this repository and stay connected.
+## References
 
+- [Spring Documentation](https://docs.spring.io/)
+- [Bootstrap](https://getbootstrap.com/)
+- [Angular Documentation](https://angular.io/docs)
+- [Font Awesome](https://fontawesome.com/)
+- [ChatLing AI](https://chatling.ai/)
+- [EmailJS](https://www.emailjs.com/)
